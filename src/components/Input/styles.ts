@@ -9,6 +9,7 @@ type InputProps = {
 export const InputElement = styled.input<InputProps>`
     background: var(--gray900);
     border: 2px solid transparent;
+    position: relative;
     border-radius: ${({ borderRadius }) => 
         borderRadius 
         ? `${borderRadius}px`
@@ -31,5 +32,11 @@ export const InputElement = styled.input<InputProps>`
 
     &:focus {
         border: 2px solid var(--green900)
+    }
+
+    &[type='password'] {
+        &::-ms-reveal {
+            display: none;
+        }
     }
 `

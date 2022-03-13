@@ -9,7 +9,7 @@ export const Container = styled.div`
     justify-content: center;
 `
 
-export const Content = styled.div`
+export const Content = styled.form`
     width: 95%;
     max-width: 600px;
     padding: 2rem;
