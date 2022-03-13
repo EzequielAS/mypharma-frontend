@@ -1,8 +1,9 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useLayoutEffect, useState } from 'react'
 import { Input } from '../../components/Input'
 import { Logo } from '../../components/Logo'
 import { Button } from '../../components/Button'
 import { useAuth } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 import { Container, Content } from './styles'
 
@@ -10,7 +11,8 @@ import { Container, Content } from './styles'
 export function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { signIn } = useAuth()
+    const { signIn, isAuthenticated } = useAuth()
+    const navigate = useNavigate()
 
     function onSubmit(event: FormEvent) {
         event.preventDefault()
@@ -21,6 +23,11 @@ export function Login() {
         setPassword('')
     }
     
+    useLayoutEffect(() => {
+        if(isAuthenticated)
+            navigate('/panel')
+    }, [navigate, isAuthenticated])
+
 
     return(
         <Container>

@@ -8,9 +8,9 @@ interface PrivateRouteProps {
 }
 
 export const PrivateRoute = ({ component: Component }: PrivateRouteProps) => {
-    const { isAuthenticated } = useAuth()
+    const { user } = useAuth()
 
-    if (!isAuthenticated) {
+    if (!user) {
       return <Navigate to="/" replace />
     }
   

@@ -12,6 +12,7 @@ type AuthContextData = {
     signIn: (credentials: SignInCredentials) => Promise<void>;
     signOut: () => void;
     isAuthenticated: boolean;
+    user: string | undefined;
 }
 
 interface AuthProviderProps {
@@ -26,45 +27,46 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const navigate = useNavigate()
     const isAuthenticated = !!user
 
-    // useEffect(() => {
-    //     const session = sessionStorage.getItem('@MyPharma:email')
-
-    //     if (session) {
-    //         api.get(`user/me/${session}`).then(response => {
-    //             const userEmail = response.data.email
-
-    //             setUser(userEmail)
-    //         })
-    //         .catch(() => {
-    //             signOut()
-    //         })
-    //     }
-    // }, [])
-
     const signIn = useCallback( async ({ email, password }: SignInCredentials) => {
-       try{
-            const response = await api.post('user/login', {
-                email,
-                password
+        try{
+             const response = await api.post('user/login', {
+                 email,
+                 password
+             })
+ 
+             const userEmail = response.data.email
+ 
+             sessionStorage.setItem('@MyPharma:email', userEmail)
+ 
+             setUser(userEmail)
+ 
+             navigate('/panel')
+        } catch(err) {
+            toast.error('Verify your datas')
+        }
+     }, [navigate])
+ 
+     const signOut = useCallback(() => {
+         sessionStorage.clear()
+     
+         navigate('/')
+     }, [navigate])
+
+
+    useEffect(() => {
+        const session = sessionStorage.getItem('@MyPharma:email')
+
+        if (session) {
+            api.get(`user/me/${session}`).then(response => {
+                const userEmail = response.data.email
+
+                setUser(userEmail)
             })
-
-            const userEmail = response.data.email
-
-            sessionStorage.setItem('@MyPharma:email', userEmail)
-
-            setUser(userEmail)
-
-            navigate('/panel')
-       } catch(err) {
-           toast.error('Verify your datas')
-       }
-    }, [navigate])
-
-    const signOut = useCallback(() => {
-        sessionStorage.clear()
-    
-        navigate('/')
-    }, [navigate])
+            .catch(() => {
+                signOut()
+            })
+        }
+    }, [signOut])
 
     
     return(
@@ -72,6 +74,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 isAuthenticated, 
                 signIn, 
                 signOut, 
+                user
             }}
         >
             {children}
