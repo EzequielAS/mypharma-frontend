@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState, useContext, useCallback } from "react"
+import { createContext, ReactNode, useState, useContext, useCallback } from "react"
 import { api } from "../services/api"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -12,7 +12,7 @@ type AuthContextData = {
     signIn: (credentials: SignInCredentials) => Promise<void>;
     signOut: () => void;
     isAuthenticated: boolean;
-    user: string | undefined;
+    user: string | null;
 }
 
 interface AuthProviderProps {
@@ -23,7 +23,7 @@ export const AuthContext = createContext({} as AuthContextData)
 
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState()
+    const [user, setUser] = useState(sessionStorage.getItem('@MyPharma:email'))
     const navigate = useNavigate()
     const isAuthenticated = !!user
 
@@ -47,26 +47,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
      }, [navigate])
  
      const signOut = useCallback(() => {
-         sessionStorage.clear()
-     
-         navigate('/')
+        sessionStorage.clear()
+        setUser(null)
+    
+        navigate('/')
      }, [navigate])
-
-
-    useEffect(() => {
-        const session = sessionStorage.getItem('@MyPharma:email')
-
-        if (session) {
-            api.get(`user/me/${session}`).then(response => {
-                const userEmail = response.data.email
-
-                setUser(userEmail)
-            })
-            .catch(() => {
-                signOut()
-            })
-        }
-    }, [signOut])
 
     
     return(

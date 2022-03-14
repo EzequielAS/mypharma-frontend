@@ -1,4 +1,4 @@
-import { FormEvent, useLayoutEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Input } from '../../components/Input'
 import { Logo } from '../../components/Logo'
 import { Button } from '../../components/Button'
@@ -16,18 +16,19 @@ export function Login() {
 
     function onSubmit(event: FormEvent) {
         event.preventDefault()
-
+        
         signIn({email, password})
 
         setEmail('')
         setPassword('')
     }
     
-    useLayoutEffect(() => {
+    useEffect(() => {
         if(isAuthenticated)
             navigate('/panel')
     }, [navigate, isAuthenticated])
 
+    
 
     return(
         <Container>
@@ -39,12 +40,14 @@ export function Login() {
                     fullWidth={true}
                     placeholder="Email"
                     type="text"
+                    value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
                 <Input 
                     fullWidth={true}
                     placeholder="Password"
                     type="password"
+                    value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
 

@@ -12,7 +12,12 @@ export function App() {
           <Routes />
         </AuthProvider>
 
-        <ToastContainer autoClose={4000} closeOnClick />
+        <ToastContainer 
+          autoClose={4000} 
+          closeOnClick 
+          theme='colored'
+        />
+        
         <Global />
       </BrowserRouter>
     )
