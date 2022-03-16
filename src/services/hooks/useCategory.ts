@@ -8,17 +8,17 @@ export type Category = {
     description: string;
 }
 
-export async function getCategories(searchTerm?: string) {
-    const response = await api.get(`category/getCategories/${searchTerm}`)
+export async function getCategories() {
+    const response = await api.get('category/getCategories')
 
     return response.data
 }
 
 
-export function useCategory(searchTerm?: string) {
+export function useCategory() {
     return useQuery<Category[], Error>(
         'category', 
-        () => getCategories(searchTerm),
+        () => getCategories(),
         {
             staleTime: 1000 * 60 * 5, // 5 minutes
             refetchOnWindowFocus: false,

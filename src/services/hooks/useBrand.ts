@@ -7,17 +7,17 @@ export type Brand = {
     name: string;
 }
 
-export async function getBrands(searchTerm?: string) {
-    const response = await api.get(`brand/getBrands/${searchTerm}`)
+export async function getBrands() {
+    const response = await api.get('brand/getBrands')
 
     return response.data
 }
 
 
-export function useBrand(searchTerm?: string) {
+export function useBrand() {
     return useQuery<Brand[], Error>(
         'brand', 
-        () => getBrands(searchTerm),
+        () => getBrands(),
         {
             staleTime: 1000 * 60 * 5, // 5 minutes
             refetchOnWindowFocus: false,
