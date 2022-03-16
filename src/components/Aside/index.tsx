@@ -10,7 +10,7 @@ export function Aside() {
     const { user, signOut } = useAuth()
 
     return (
-        <Container isAsideOpen={false}>
+        <Container isAsideOpen={true}>
 
             <FirstSection>
                 <FaUserCircle />

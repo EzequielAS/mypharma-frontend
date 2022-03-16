@@ -4,22 +4,37 @@ import {
     FaRegCaretSquareDown 
 } from 'react-icons/fa'
 
-import { Container } from './styles'
+import { Container, Main, Informations } from './styles'
 
 interface CardProps {
     name: string;
+    informations?: string[];
 }
 
-export function Card({ name }: CardProps) {
+export function Card({ name, informations }: CardProps) {
     return (
         <Container>
-            <p>{name}</p>
-            
-            <div>
-                <FaRegEdit />
-                <FaRegTrashAlt />
-                <FaRegCaretSquareDown />
-            </div>
+            <Main>
+                <p>{name}</p>
+                
+                <div>
+                    <FaRegEdit />
+                    <FaRegTrashAlt />
+                </div>
+            </Main>
+
+            {
+                informations && 
+                <Informations>
+                    {
+                        informations.map(info => (
+                            <p key={info}>
+                                {info}
+                            </p>
+                        ))
+                    }
+                </Informations>
+            }
         </Container>
     )
 }
