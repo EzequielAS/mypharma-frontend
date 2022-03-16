@@ -25,7 +25,7 @@ export function Login() {
     
     useEffect(() => {
         if(isAuthenticated)
-            navigate('/panel')
+            navigate('/categories')
     }, [navigate, isAuthenticated])
 
     

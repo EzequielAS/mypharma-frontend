@@ -5,16 +5,12 @@ import { Button } from "../Button"
 
 import { Container, FirstSection, SecondSection } from "./styles"
 
-interface AsideProps {
-    isAsideOpen: boolean;
-    setIsAsideOpen: (value: boolean) => void;
-}
 
-export function Aside({ isAsideOpen, setIsAsideOpen }: AsideProps) {
+export function Aside() {
     const { user, signOut } = useAuth()
 
     return (
-        <Container isAsideOpen={true}>
+        <Container isAsideOpen={false}>
 
             <FirstSection>
                 <FaUserCircle />

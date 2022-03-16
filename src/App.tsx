@@ -7,11 +7,12 @@ import Routes from './routes'
 export function App() {
     return (
       <BrowserRouter>
-      
+
+        
         <AuthProvider>
           <Routes />
         </AuthProvider>
-
+      
         <ToastContainer 
           autoClose={4000} 
           closeOnClick 

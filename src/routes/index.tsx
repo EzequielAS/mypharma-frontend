@@ -2,15 +2,26 @@ import { Routes as Switch, Route } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'
 
 import { Login } from '../pages/Login'
-import { Panel } from '../pages/Panel';
+import { Categories } from '../pages/Categories'
+import { Brands } from '../pages/Brands'
+import { Products } from '../pages/Products'
 
 const Routes = () => (
     <Switch>
         <Route path='/' element={<Login />} />
         <Route 
-            path='/panel' 
-            element={<PrivateRoute component={Panel} />}
+            path='/categories' 
+            element={<PrivateRoute component={Categories} />}
         />
+        <Route 
+            path='/brands' 
+            element={<PrivateRoute component={Brands} />}
+        />
+        <Route 
+            path='/products' 
+            element={<PrivateRoute component={Products} />}
+        />
+        <Route path='*' element={<p>404</p>}/>
     </Switch>
 );
 

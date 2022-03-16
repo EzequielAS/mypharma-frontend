@@ -40,7 +40,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
  
              setUser(userEmail)
  
-             navigate('/panel')
+             navigate('/categories')
         } catch(err) {
             toast.error('Verify your datas')
         }
