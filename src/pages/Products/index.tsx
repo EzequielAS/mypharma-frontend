@@ -8,7 +8,6 @@ import { Container, Content } from './styles'
 
 import { Button } from "../../components/Button"
 import { queryClient } from "../../services/queryClient"
-import { useMutation } from 'react-query'
 import { api } from "../../services/api"
 import { Product } from "../../services/hooks/useProduct"
 
@@ -16,7 +15,7 @@ import { Product } from "../../services/hooks/useProduct"
 export function Products() {
     const { data, isLoading } = useProduct()
     
-    const search = useMutation(async (searchTerm: string) => {
+    async function search(searchTerm: string) {
         const response = await api.get(`product/getProducts/${searchTerm}`)
 
         const listFormatted = response.data.map((product: Product) => {
@@ -31,12 +30,8 @@ export function Products() {
             }
         })
 
-        return listFormatted
-    }, {
-        onSuccess: () => {
-            queryClient.invalidateQueries('product')
-        }
-    })
+        queryClient.setQueryData('product', listFormatted)
+    }
 
 
     return(
@@ -44,13 +39,6 @@ export function Products() {
             <Header />
 
             <Aside />
-
-            <Button 
-                text="goiaba"
-                onClick={() => {
-                    search.mutateAsync('w')
-                }}
-            />
 
             {
                 isLoading 
