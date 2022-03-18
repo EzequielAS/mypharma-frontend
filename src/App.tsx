@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { AuthProvider } from './context/AuthContext'
+import { CommonActionsProvider } from './context/CommonActionsContext'
 import { QueryClientProvider } from "react-query"
 import { queryClient } from './services/queryClient'
 import Global from './styles/global'
@@ -12,9 +13,11 @@ export function App() {
       <BrowserRouter>
         
         <AuthProvider>
-          <QueryClientProvider client={queryClient}>
-            <Routes />
-          </QueryClientProvider>
+          <CommonActionsProvider>
+            <QueryClientProvider client={queryClient}>
+              <Routes />
+            </QueryClientProvider>
+          </CommonActionsProvider>
         </AuthProvider>
       
         <ToastContainer 

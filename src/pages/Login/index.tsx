@@ -1,24 +1,29 @@
 import { FormEvent, useEffect, useState } from 'react'
-import { Input } from '../../components/Input'
+import { Input } from '../../components/Form/Input'
 import { Logo } from '../../components/Logo'
 import { Button } from '../../components/Button'
 import { useAuth } from '../../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { FaArrowRight } from 'react-icons/fa'
+import { Link, useNavigate } from 'react-router-dom'
 
-import { Container, Content } from './styles'
+import { Container, Content, RegisterButton } from './styles'
 
 
 export function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { signIn, isAuthenticated } = useAuth()
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
 
-    function onSubmit(event: FormEvent) {
-        event.preventDefault()
-        
-        signIn({email, password})
+    const { signIn, isAuthenticated } = useAuth()
 
+    async function onSubmit(event: FormEvent) {
+        event.preventDefault()
+        setIsLoading(true)
+        
+        await signIn({email, password})
+
+        setIsLoading(false)
         setEmail('')
         setPassword('')
     }
@@ -51,9 +56,18 @@ export function Login() {
                     onChange={e => setPassword(e.target.value)}
                 />
 
+                <RegisterButton>
+                    <Link to="/register">
+                        Register now
+                    </Link>
+
+                    <FaArrowRight />
+                </RegisterButton>
+
                 <Button 
                     text="LOGIN"
                     type="submit"
+                    isLoading={isLoading}
                 />
             </Content>
 

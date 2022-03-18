@@ -9,7 +9,6 @@ type InputProps = {
 export const InputElement = styled.input<InputProps>`
     background: var(--gray900);
     border: 2px solid transparent;
-    position: relative;
     border-radius: ${({ borderRadius }) => 
         borderRadius 
         ? `${borderRadius}px`
@@ -38,5 +37,15 @@ export const InputElement = styled.input<InputProps>`
         &::-ms-reveal {
             display: none;
         }
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    &[type=number] {
+        -moz-appearance:textfield;
     }
 `

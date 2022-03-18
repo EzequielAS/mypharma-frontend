@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
 export const Container = styled.div`
     height: 100vh;
@@ -22,7 +22,7 @@ export const Content = styled.form`
     flex-direction: column;
     gap: 1rem;
 `
-export const RegisterButton = styled.div`
+export const BackToLoginButton = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +31,7 @@ export const RegisterButton = styled.div`
 
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
 
     font-size: 0.7rem;
     font-weight: 900;

@@ -1,15 +1,16 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components"
 
-type ButtonProps = { 
+type SelectProps = { 
     borderRadius?: string;
     padding?: string;
     fullWidth?: boolean;
     isLoading?: boolean;
 }
 
-export const ButtonElement = styled.button<ButtonProps>`
-    background: var(--green900);
-    border: none;
+export const Container = styled.select<SelectProps>`
+    background: var(--gray900);
+    border: 2px solid transparent;
+    position: relative;
     border-radius: ${({ borderRadius }) => 
         borderRadius 
         ? `${borderRadius}px`
@@ -19,25 +20,19 @@ export const ButtonElement = styled.button<ButtonProps>`
     padding: ${({ padding }) => 
         padding 
         ? `${padding}rem`
-        : '0.7rem'
+        : '0.5rem'
     };
     width: ${({ fullWidth }) =>
         fullWidth 
         ? '100%'
-        : '12rem'
+        : '15rem'
     };
-
-    color: var(--gray50);
+    color: var(--gray500);
     font-size: 1rem;
     font-weight: 900;
-    transition: filter 0.3s;
-
-    &:hover {
-        filter: brightness(0.9);
-    }
 
     ${({ isLoading }) => isLoading && css`
-        opacity: 0.5;
         pointer-events: none;
+        opacity: 0.5;
     `}
 `

@@ -8,8 +8,15 @@ type SignInCredentials = {
     password: string;
 }
 
+type SignUpData = {
+    name: string;
+    email: string;
+    password: string;
+}
+
 type AuthContextData = {
     signIn: (credentials: SignInCredentials) => Promise<void>;
+    signUp: (data: SignUpData) => Promise<void>;
     signOut: () => void;
     isAuthenticated: boolean;
     user: string | null;
@@ -42,16 +49,42 @@ export function AuthProvider({ children }: AuthProviderProps) {
  
              navigate('/categories')
         } catch(err) {
-            toast.error('Verify your datas')
+            toast.error('Check your data')
         }
      }, [navigate])
+
+    const signUp = useCallback(async ({ email, name, password }: SignUpData) => {
+        if(email.trim() === '' || name.trim() === ''|| password.trim() === '') {
+            toast.error('Fill in the data')
+
+            return
+        }
+
+        try{
+            const response = await api.post('user/register', {
+                email,
+                password,
+                name
+            })
+
+            const userEmail = response.data.email
+
+            sessionStorage.setItem('@MyPharma:email', userEmail)
+
+            setUser(userEmail)
+
+            navigate('/categories')
+       } catch(err) {
+           toast.error('Something went wrong')
+       }
+    }, [navigate])
  
-     const signOut = useCallback(() => {
+    const signOut = useCallback(() => {
         sessionStorage.clear()
         setUser(null)
     
         navigate('/')
-     }, [navigate])
+    }, [navigate])
 
     
     return(
@@ -59,6 +92,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 isAuthenticated, 
                 signIn, 
                 signOut, 
+                signUp,
                 user
             }}
         >

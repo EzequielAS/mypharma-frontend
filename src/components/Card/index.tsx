@@ -1,7 +1,6 @@
 import { 
     FaRegEdit, 
     FaRegTrashAlt, 
-    FaRegCaretSquareDown 
 } from 'react-icons/fa'
 
 import { Container, Main, Informations } from './styles'
@@ -9,22 +8,33 @@ import { Container, Main, Informations } from './styles'
 interface CardProps {
     name: string;
     informations?: string[];
+    isLoading: boolean;
+    handleDelete: () => void;
+    handleEdit: () => void;
 }
 
-export function Card({ name, informations }: CardProps) {
+export function Card({ 
+    name, 
+    informations, 
+    isLoading, 
+    handleDelete,
+    handleEdit
+}: CardProps) {
+    const checkingIfExistsDatas = informations && informations[0] === ''
+
     return (
-        <Container>
+        <Container isLoading={isLoading}>
             <Main>
                 <p>{name}</p>
                 
                 <div>
-                    <FaRegEdit />
-                    <FaRegTrashAlt />
+                    <FaRegEdit onClick={handleEdit}/>
+                    <FaRegTrashAlt onClick={handleDelete}/>
                 </div>
             </Main>
 
             {
-                informations && 
+                informations && !checkingIfExistsDatas &&
                 <Informations>
                     {
                         informations.map(info => (

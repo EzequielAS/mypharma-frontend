@@ -14,30 +14,14 @@ export interface Product {
     category: Category;
 }
 
-interface ProductFormatted extends Omit<Product, 'price'> {
-    price: string;
-}
-
 export async function getProducts() {
     const response = await api.get('product/getProducts')
 
-    const listFormatted = response.data.map((product: Product) => {
-        return {
-            ...product,
-            price: new Intl.NumberFormat('pt-BR', 
-            { 
-                style: 'currency', 
-                currency: 'BRL', 
-                maximumFractionDigits: 2 
-            }).format(product.price)
-        }
-    })
-
-    return listFormatted
+    return response.data
 }
 
 export function useProduct() {
-    return useQuery<ProductFormatted[], Error>(
+    return useQuery<Product[], Error>(
         'product', 
         getProducts,
         {

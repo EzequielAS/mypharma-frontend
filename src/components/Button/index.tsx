@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from "react"
+import { ButtonHTMLAttributes, ReactNode } from "react"
 
 import { ButtonElement } from './styles'
 
@@ -7,7 +7,8 @@ extends ButtonHTMLAttributes<HTMLButtonElement> {
     borderRadius?: string;
     padding?: string;
     fullWidth?: boolean;
-    text: string;
+    text: ReactNode;
+    isLoading?: boolean;
 }
 
 export function Button({ 
@@ -15,16 +16,22 @@ export function Button({
     padding, 
     fullWidth = false,
     text,
+    isLoading,
     ...rest 
 }: ButtonProps) {
     return (
         <ButtonElement
             borderRadius={borderRadius}
             padding={padding}
+            isLoading={isLoading}
             fullWidth={fullWidth}
             {...rest}
         >
-            { text }
+            {
+                isLoading 
+                ? <p>Loading...</p>
+                : text 
+            }
         </ButtonElement>
     )
 }

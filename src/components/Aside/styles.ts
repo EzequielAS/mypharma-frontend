@@ -30,6 +30,15 @@ export const Container = styled.aside<ContainerProps>`
         padding: 0.5rem;
         width: 10rem;
     }
+
+    .close {
+        font-size: 1.3rem;
+        color: var(--gray500);
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+    }
 `
 
 export const FirstSection = styled.section`

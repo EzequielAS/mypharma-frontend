@@ -1,6 +1,10 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
-export const Container = styled.div`
+type ContainerProps = {
+    isLoading: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
     width: 100%;
     padding: 0.5rem;
     background: var(--green900);
@@ -10,6 +14,11 @@ export const Container = styled.div`
     & + & {
         margin-top: 1rem;
     }
+
+    ${({ isLoading }) => isLoading && css`
+        opacity: 0.5;
+        pointer-events: none;
+    `}
 `
 
 export const Main = styled.div`
@@ -28,6 +37,10 @@ export const Main = styled.div`
         align-items: center;
         gap: 0.5rem;
         font-size: 1.2rem;
+        
+        svg {
+            cursor: pointer;
+        }
     }
 `
 
