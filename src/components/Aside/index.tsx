@@ -27,19 +27,28 @@ export function Aside() {
             <SecondSection>
 
                 <div>
-                    <Link to="/categories">
+                    <Link 
+                        to="/categories"
+                        onClick={handleIsAsideOpen}
+                    >
                         <p>Categories</p>
                     </Link>
                 </div>
 
                 <div>
-                    <Link to="/brands">
+                    <Link 
+                        to="/brands"
+                        onClick={handleIsAsideOpen}
+                    >
                         <p>Brands</p>
                     </Link>
                 </div>
 
                 <div>
-                    <Link to="/products">
+                    <Link 
+                        to="/products"
+                        onClick={handleIsAsideOpen}
+                    >
                         <p>Products</p>
                     </Link>
                 </div>
