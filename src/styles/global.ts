@@ -41,19 +41,22 @@ export default createGlobalStyle`
         color: var(--gray50);
         -webkit-font-smoothing: antialiased;   
        
-        /* &::-webkit-scrollbar-track {
-            background-color: #FFF;
+        &::-webkit-scrollbar-track {
+            background-color: var(--gray800);
         }
+
         &::-webkit-scrollbar {
             width: 5px;
         }
+
         &::-webkit-scrollbar-thumb {
-            background: #C3C3C3;
+            background: var(--gray600);
             border-radius: 4px;
         }
+
         scrollbar-width: thin;
-        scrollbar-color: #C3C3C3;
-        scrollbar-track-color: #FFF; */
+        scrollbar-color: var(--gray600);
+        scrollbar-track-color: var(--gray800);
     }
 
     body, input, button {
