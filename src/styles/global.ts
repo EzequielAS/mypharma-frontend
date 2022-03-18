@@ -46,12 +46,12 @@ export default createGlobalStyle`
         }
 
         &::-webkit-scrollbar {
-            width: 5px;
+            width: 10px;
         }
 
         &::-webkit-scrollbar-thumb {
             background: var(--gray600);
-            border-radius: 4px;
+            border-radius: 5px;
         }
 
         scrollbar-width: thin;
