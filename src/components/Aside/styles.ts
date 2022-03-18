@@ -8,6 +8,7 @@ export const Container = styled.aside<ContainerProps>`
     position: fixed;
     top: 0;
     right: 0;
+    z-index: 99;
 
     width: 100%;
     height: 100%;
