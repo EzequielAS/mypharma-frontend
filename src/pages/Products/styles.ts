@@ -7,7 +7,7 @@ export const Container = styled.section`
 export const Content = styled.div`
     width: 95%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto auto 2rem;
 `
 export const Actions = styled.section`
     width: 95%;
